@@ -6,18 +6,15 @@ import {
     getUsers,
     createUser
 } from "../controllers/user.js";
+import { verifyAdmin, verifyUser} from "../utils/verifyToken.js";
 
-const router =  express.Router();
-//CREATE
-router.post("/", createUser)
-//update
-router.put("/:id", updateUser)
+router.put("/:id",verifyUser, updateUser)
 //DELETE\
-router.delete("/:id", deleteUser)
+router.delete("/:id",verifyUser, deleteUser)
 //GET
-router.get("/:id", getUser)
+router.get("/:id",verifyUser, getUser)
 
-router.get("/",getUsers)
+router.get("/",verifyAdmin,getUsers)
 
 
 export default router;
