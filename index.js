@@ -4,8 +4,8 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
 import authRoute  from "./routes/auth.js";
-//import promptsRoute  from "./routes/prompts.js";
-//import tagsRoute  from "./routes/tags.js";
+import promptsRoute  from "./routes/prompts.js";
+import tagsRoute  from "./routes/tags.js";
 import usersRoute  from "./routes/users.js";
 
 
@@ -26,9 +26,8 @@ app.use(cors({
 }));
 app.use("/api/auth",authRoute);
 app.use("/api/users",usersRoute);
-
-//app.use("/api/prompts",promptsRoute);
-//app.use("/api/tags",tagsRoute);
+app.use("/api/prompts",promptsRoute);
+app.use("/api/tags",tagsRoute);
 
 //connection with moongoo
 const connect = async () =>{
