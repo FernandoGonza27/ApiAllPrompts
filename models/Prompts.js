@@ -4,10 +4,14 @@ import mongoose from 'mongoose';
 //el squema hace referencia al objeto y a los tipos de datos que se utilizaraan 
 
 const UserSchema = new mongoose.Schema({
-    instruction:{
+    name:{
         type: String, 
         require:true,
         unique:true    
+    },
+    instruction:{
+        type: String, 
+        require:true           
     },
     context:{
         type: String, 
@@ -22,7 +26,9 @@ const UserSchema = new mongoose.Schema({
         type:[ mongoose.ObjectId],
         ref: 'Tag'
       },    
-    respoonses:[{name: String, response: String}],
+    responses:{
+        type:[String]
+    },
     }
 ,{timestamps: true})
 
