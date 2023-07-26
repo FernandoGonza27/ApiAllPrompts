@@ -36,22 +36,28 @@ export const deleteTag = async (req,res,next) =>{
     }
 
 }
-export const getTag = async (req,res,next) =>{
-    try{
-        const tag = await Tag.findById(
-            req.params.id);
-        res.status(200).json(tag);
-    }catch(err){
-        next(err)
-    }
 
-}
-export const getTags = async (req,res,next) =>{      
-    try{
-        const tags = await Tag.find();
-        res.status(200).json(tags);
-    }catch(err){
-        next(err)
-    }
 
-}
+export const getTag = async (req, res, next) => {
+    try {
+        if (req.query && req.query.id) {
+            const tag = await Tag.findById(
+                req.query.id // Cambiar "req.params.id" a "req.query.id"
+            );
+            res.status(200).json(tag);
+        }
+        if (req.query && req.query.description) {
+            const tag = await Tag.find(
+                { description: { $regex: req.query.description, $options: "i" } }
+            );
+            res.status(200).json(tag);
+        
+        }
+        else{
+            const tags = await Tag.find();
+            res.status(200).json(tags);
+        }
+    } catch (err) {
+        next(err);
+    }
+};

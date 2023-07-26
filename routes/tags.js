@@ -2,22 +2,22 @@ import express from "express";
 import {
     updateTag,
     getTag,
-    deleteTag,
-    getTags,
+    deleteTag,    
     createTag    
 } from "../controllers/tag.js";
+import { verifyUser } from "../utils/verifyToken.js";
 const router = express.Router();
 
 // IT IS CALLED THE FUNCTION CREATE OF CONTROLLER
-router.post("/",createTag)
+router.post("/",verifyUser,createTag)
 // IT IS CALLED THE FUNCTION UPDATE OF CONTROLLER
-router.put("/:id", updateTag)
+router.put("/:id",verifyUser, updateTag)
 // IT IS CALLED THE FUNCTION DELETE OF CONTROLLER
-router.delete("/:id", deleteTag)
+router.delete("/:id",verifyUser, deleteTag)
 // IT IS CALLED THE FUNCTION GET OF CONTROLLER
-router.get("/:id", getTag)
+router.get("/", verifyUser,getTag)
 // IT IS CALLED THE FUNCTION GET ALL OF CONTROLLER
-router.get("/",getTags)
+
 
 
 export default router;

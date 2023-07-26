@@ -22,6 +22,10 @@ const UserSchema = new mongoose.Schema({
         type: String, 
         require:false,
     },
+    userId:{
+        type: mongoose.ObjectId, 
+        require:true,
+    },
     tags: {
         type:[ mongoose.ObjectId],
         ref: 'Tag'

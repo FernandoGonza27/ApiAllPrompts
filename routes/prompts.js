@@ -2,19 +2,20 @@ import express from "express";
 import {
     updatePrompt,
     getPrompt,
-    deletePrompt,
-    getPrompts,
-    createPrompt
+    deletePrompt,    
+    createPrompt,
+    getPromptsByUser
 } from "../controllers/prompts.js";
+import { verifyUser } from "../utils/verifyToken.js"; 
 const router =  express.Router();
 
-router.post("/",createPrompt)
+router.post("/",verifyUser,createPrompt)
 // IT IS CALLED THE FUNCTION UPDATE OF CONTROLLER
-router.put("/:id", updatePrompt)
+router.put("/:id",verifyUser, updatePrompt)
 // IT IS CALLED THE FUNCTION DELETE OF CONTROLLER
-router.delete("/:id", deletePrompt)
+router.delete("/:id",verifyUser, deletePrompt)
 // IT IS CALLED THE FUNCTION GET OF CONTROLLER
-router.get("/:id", getPrompt)
-// IT IS CALLED THE FUNCTION GET ALL OF CONTROLLER
-router.get("/"  ,getPrompts)
+router.get("/",verifyUser,getPrompt)
+
+router.get("/:iduser",verifyUser,getPromptsByUser)
 export default router;
