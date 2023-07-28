@@ -9,6 +9,10 @@ const UserSchema = new mongoose.Schema({
         require:true,
         unique:true    
     },
+    type: {
+        type: String,
+        enum: ['edit', 'image','completions']
+    },
     instruction:{
         type: String, 
         require:true           
