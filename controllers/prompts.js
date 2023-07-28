@@ -1,5 +1,6 @@
 import Prompt from "../models/Prompts.js";
 import mongoose from 'mongoose'; 
+
 export const createPrompt = async (req, res, next) => {
     //se crea el nuevo objeto con el modelo previamete creado 
     const newPrompt = new Prompt(req.body);
@@ -70,4 +71,22 @@ export const getPromptsByUser = async (req, res, next) => {
     } catch (err) {
         next(err);
     }
+};
+export const ExecutePrompt = async (req, res, next) => {
+    const { prompt } = req.body;
+    try {
+        const response = await openaiApi.completions.create({
+          engine: "davinci-codex",
+          prompt: prompt,
+          maxTokens: 200,
+          temperature: 0.7,
+          n: 1,
+          stop: ["\n"],
+        });
+    
+        res.json({ text: response.data.choices[0].text });
+      } catch (error) {
+        console.error("Error al realizar la solicitud:", error);
+        res.status(500).json({ error: "Error al procesar el prompt" });
+      }
 };

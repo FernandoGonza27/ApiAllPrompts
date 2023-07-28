@@ -3,6 +3,7 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
+import openai from "openai";
 import authRoute  from "./routes/auth.js";
 import promptsRoute  from "./routes/prompts.js";
 import tagsRoute  from "./routes/tags.js";
@@ -13,6 +14,7 @@ dotenv.config();
 
 const app = express();
 // database connection
+
 
 
 

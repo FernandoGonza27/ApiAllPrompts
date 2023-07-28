@@ -4,12 +4,14 @@ import {
     getPrompt,
     deletePrompt,    
     createPrompt,
-    getPromptsByUser
+    getPromptsByUser,
+    ExecutePrompt
 } from "../controllers/prompts.js";
 import { verifyUser } from "../utils/verifyToken.js"; 
 const router =  express.Router();
 
 router.post("/",verifyUser,createPrompt)
+router.post("/execute",verifyUser,ExecutePrompt)
 // IT IS CALLED THE FUNCTION UPDATE OF CONTROLLER
 router.put("/:id",verifyUser, updatePrompt)
 // IT IS CALLED THE FUNCTION DELETE OF CONTROLLER
